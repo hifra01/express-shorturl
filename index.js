@@ -20,10 +20,9 @@ app.use(cors());
 app.get('/:alias', async (req, res) => {
   const urlAlias = req.params.alias;
   try {
-    const url = await links.findOne({ alias: urlAlias });
-    const urlJson = await url.json();
-    if (urlJson !== null) {
-      res.redirect(urlJson.url);
+    const urlSearch = await links.findOne({ alias: urlAlias });
+    if (urlSearch !== null) {
+      res.redirect(urlSearch.url);
     } else {
       res.sendStatus(404);
     }
