@@ -18,6 +18,13 @@ mongoose.connect(
 app.use(cors());
 
 app.get('/:alias', async (req, res) => {
+  await mongoose.connect(
+    MONGODB_URI,
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    },
+  );
   const urlAlias = req.params.alias;
   try {
     const urlSearch = await links.findOne({ alias: urlAlias });
