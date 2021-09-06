@@ -1,21 +1,12 @@
-const mongoose = require('mongoose');
-const links = require('../../models/Links');
-const FindUrlValidator = require('../../validator/find');
+const db = require('../../services/MongoDBServices');
+const UrlValidator = require('../../validator/url');
 
 module.exports = async (req, res, next) => {
   try {
     const { query } = req;
-    FindUrlValidator.validateFindUrl(query);
-    const { MONGODB_URI } = process.env;
-    mongoose.connect(
-      MONGODB_URI,
-      {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-      },
-    );
+    UrlValidator.validateFindUrl(query);
     const urlAlias = query.alias;
-    const urlSearch = await links.findOne({ alias: urlAlias });
+    const urlSearch = await db.findUrl(urlAlias);
     res.send(urlSearch);
   } catch (e) {
     next(e);

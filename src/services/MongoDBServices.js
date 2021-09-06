@@ -9,6 +9,8 @@ module.exports = {
     }
     throw new NotFoundError('URL not found');
   },
-  // addAlias: async (url, alias) => {
-  // },
+  addAlias: async (url, alias) => links.create({
+    alias,
+    url,
+  }),
 };

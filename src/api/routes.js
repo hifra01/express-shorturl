@@ -1,12 +1,10 @@
 const express = require('express');
 const getUrlHandler = require('./handlers/getUrlHandler');
-const NotFoundError = require('../exceptions/NotFoundError');
+const addUrlHandler = require('./handlers/addUrlHandler');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  next(new NotFoundError('URL not found'));
-});
 router.get('/find', getUrlHandler);
+router.post('/add', addUrlHandler);
 
 module.exports = router;
