@@ -1,20 +1,15 @@
 const Joi = require('joi');
 
-const FindUrlSchema = Joi.object({
-  alias: Joi.string()
-    .required(),
-});
-
 const AddUrlSchema = Joi.object({
   url: Joi.string()
-    .uri({ allowRelative: true })
+    .uri()
     .required(),
   alias: Joi.string()
     .trim()
+    .allow('')
     .regex(/^[\w-]+$/),
 });
 
 module.exports = {
-  FindUrlSchema,
   AddUrlSchema,
 };

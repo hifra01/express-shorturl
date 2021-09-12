@@ -34,6 +34,10 @@ app.get('/:alias', async (req, res, next) => {
   }
 });
 
+app.get('/', async (req, res) => {
+  res.redirect(process.env.FRONTEND_URL);
+});
+
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   if (err instanceof ClientError) {
